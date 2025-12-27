@@ -2,6 +2,10 @@
 
 This project provides a solution for translating English text to Darija, featuring a web-based application, a browser extension, and a backend API.
 
+## Presentation video
+
+[![English To Darija Translator presentation video](/assets/presentation_video.png)](https://drive.google.com/file/d/1pLO45KQmDSU96ssJfALcjpda99VtJk4v/view?usp=sharing)
+
 ## Features
 
 *   **Web Application:** A user-friendly interface for text translation, user authentication (login/signup), and user settings.

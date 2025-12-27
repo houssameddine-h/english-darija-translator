@@ -1,4 +1,4 @@
-const API_URL = 'http://localhost:3000/api/translate';
+const API_URL = 'http://localhost:3000/api/v1/translate';
 
 document.addEventListener('DOMContentLoaded', () => {
   const inputText = document.getElementById('inputText');
@@ -24,7 +24,10 @@ document.addEventListener('DOMContentLoaded', () => {
             body: JSON.stringify({ text: textToTranslate })
         });
 
-      const data = await response.json();
+      const jsonData = await response.json();
+      const data = jsonData.data;
+
+      console.log(data);
 
       if (data.success) {
             resultDiv.textContent = data.translation;

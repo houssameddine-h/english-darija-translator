@@ -9,9 +9,8 @@ export async function translateText(englishText) {
 
         const prompt = PROMPT(englishText);
 
-        // const result = await model.generateContent(prompt);
-        const translation = 'PLACEHOLDER!'; // result.response.text().trim();
-        // throw new Error("testing error")
+        const result = await model.generateContent(prompt);
+        const translation = result.response.text().trim();
 
         return {
             success: true,

@@ -36,7 +36,7 @@ async function logInUser(email, password) {
             }
         } else {
             // redirect to home
-            window.location = '/';
+            window.location = '/frontend';
         }
         return loginStatus;
     } catch (e) {

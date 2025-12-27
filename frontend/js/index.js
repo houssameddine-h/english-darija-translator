@@ -33,7 +33,7 @@ async function logoutUser() {
     await fetch(`${API_URL}/auth/logout`, {
         credentials: 'include'
     });
-    window.location = '/';
+    window.location = '/frontend';
 }
 
 async function translate() {
@@ -166,58 +166,3 @@ function showAuthActions() {
 }
 
 addEventListener('load', getUser);
-
-const micBtn = document.getElementById('micBtn');
-
-const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-
-if (SpeechRecognition) {
-    const recognition = new SpeechRecognition();
-    recognition.continuous = true;
-    recognition.interimResults = true;
-
-    micBtn.addEventListener('click', () => {
-        if (micBtn.classList.contains('recording')) {
-            recognition.stop();
-        } else {
-            recognition.start();
-        }
-    });
-
-    recognition.onstart = () => {
-        micBtn.classList.add('recording');
-        showStatus('Recording started...', 'success');
-    };
-
-    recognition.onend = () => {
-        micBtn.classList.remove('recording');
-        showStatus('Recording stopped.', 'success');
-        if (inputText.value.trim().length > 0) {
-            translate();
-        }
-    };
-
-    recognition.onresult = (event) => {
-        let interimTranscript = '';
-        let finalTranscript = '';
-        for (let i = event.resultIndex; i < event.results.length; i++) {
-            const transcript = event.results[i][0].transcript;
-            if (event.results[i].isFinal) {
-                finalTranscript += transcript + ' ';
-            } else {
-                interimTranscript += transcript;
-            }
-        }
-        inputText.value = finalTranscript + interimTranscript;
-        charCount.textContent = inputText.value.length;
-    };
-
-    recognition.onerror = (event) => {
-        showStatus('Error in speech recognition: ' + event.error, 'error');
-        micBtn.classList.remove('recording');
-    };
-
-} else {
-    micBtn.style.display = 'none';
-    showStatus('Speech recognition not supported in this browser.', 'error');
-}
